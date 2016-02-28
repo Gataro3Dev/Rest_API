@@ -13,7 +13,7 @@ module.exports = function(passport){
 //deserializar usuario llamará con el identificador único facilitado por serializar
   passport.deserializeUser(function (id, done) {
     User.findById(id, function (err, user) {
-      console.log('deserializar usuario: ', user.username);
+     // console.log('deserializar usuario: ', user.username);
       return done(err, user);
     });
   });
@@ -21,7 +21,7 @@ module.exports = function(passport){
   passport.use('login', new localStrategy({
       passReqCallback : true
     },
-    function (req, username, password, done) {
+    function (username, password, done) {
       //comprobar en mongo si el nombre de usuario existe o no
       User.findOne({'username': username}, function (err, user) {
         //en caso de cualquier error, retornar usando el metodo de nuevo
