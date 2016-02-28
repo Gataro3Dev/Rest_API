@@ -15,6 +15,8 @@ mongoose.connect('mongodb://localhost/chat');
 
 var app = express();
 
+
+app.use(express.static(__dirname + '/public'));
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/public');
 app.set('view engine', 'html');
@@ -26,7 +28,6 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
